@@ -23,8 +23,9 @@ myform = form.Form(
 	form.Dropdown('Country', ['Kenya', 'Uganda', 'Tanzania']), 
 	form.Textbox("Email"), 
 	form.Textbox("Cardholder's Name",form.notnull),
-	form.Textbox("Card Number",form.notnull,form.regexp('\d+', 'Must be a digit'),form.Validator('Must be 16 to 19', lambda x:20>len(x)>=16 ))
-	#,
+	form.Textbox("Card Number",form.notnull,form.regexp('\d+', 'Must be a digit'),form.Validator('Must be 16 to 19', lambda x:20>len(x)>=16 )),
+	form.Textbox("Card Expiry Date",form.notnull),
+	form.Textbox("Card CVV/CVV2",form.notnull)
 )
 
 class index: 

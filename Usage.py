@@ -24,14 +24,16 @@ class Usage:
 	    print 'Date: ', date
 	    referenceNo = date
 	    orderInfo = date
-	    amount = '1225'
+	    amount = '10'
             print "Form: ",form
 	    card = form["Card Number"].encode("ascii","ignore")
+	    expiry = form["Card Expiry Date"].encode("ascii","ignore")
+	    cvv = form["Card CVV/CVV2"].encode("ascii","ignore")
 	    currency = 'KES'
 	
 	    #print 'date: %s, referenceNo: %s, orderInfo: %s, amount: %s, card: %s, currency: %s' % (date, referenceNo, orderInfo, amount, card, currency)
 	
-	    results = api.sendRequest(referenceNo, orderInfo, amount, card, currency)
+	    results = api.sendRequest(referenceNo, orderInfo, amount, card, currency,expiry,cvv)
 	
 	    return 'responseCode: %s, authId: %s, receiptNo: %s' % (results['responseCode'], results['authId'], results['receiptNo'])
 		

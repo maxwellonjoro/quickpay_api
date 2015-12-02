@@ -27,8 +27,8 @@ class QuickPayAPI:
 		self.Debug                  = True
 		
 	# HTTP method
-	def sendRequest(self, referenceNo_, orderInfo_, amount_, card_, currency_):		
-		if len(referenceNo_) == 0 or len(orderInfo_) == 0 or len(amount_) == 0 or len(card_) == 0 or len(currency_) == 0:
+	def sendRequest(self, referenceNo_, orderInfo_, amount_, card_, currency_,expiry_,cvv_):		
+		if len(referenceNo_) == 0 or len(orderInfo_) == 0 or len(amount_) == 0 or len(card_) == 0 or len(currency_) == 0 or len(expiry_) == 0 or len(cvv_) == 0:
 			raise QuickPayAPIException("Please provide all the parameters")
 
 		parameters = {'username' : self.username,
@@ -36,7 +36,9 @@ class QuickPayAPI:
 			'orderInfo': orderInfo_,
 			'amount': amount_,
 			'card': card_,
-			'currency':currency_
+			'currency':currency_,
+			'expiry':expiry_,
+			'cvv':cvv_
 		}
 		
 		response = self.executeRequest(self.QuickPayURL, parameters, self.headers)
