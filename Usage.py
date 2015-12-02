@@ -1,8 +1,9 @@
 # Import the QuickPayAPI class
 from QuickPayAPI import QuickPayAPI, QuickPayAPIException
 from datetime import datetime
-import cgi
 import time
+import web
+from web import form
 
 class Usage:
     def POST(self):	
@@ -24,14 +25,16 @@ class Usage:
 	    referenceNo = date
 	    orderInfo = date
 	    amount = '1225'
-	    card = form["Card Number"]
+            print "Form: ",form
+	    card = form["Card Number"].encode("ascii","ignore")
 	    currency = 'KES'
 	
 	    #print 'date: %s, referenceNo: %s, orderInfo: %s, amount: %s, card: %s, currency: %s' % (date, referenceNo, orderInfo, amount, card, currency)
 	
 	    results = api.sendRequest(referenceNo, orderInfo, amount, card, currency)
 	
-	    print 'responseCode: %s, authId: %s, receiptNo: %s' % (results['responseCode'], results['authId'], results['receiptNo'])
+	    return 'responseCode: %s, authId: %s, receiptNo: %s' % (results['responseCode'], results['authId'], results['receiptNo'])
 		
 	except QuickPayAPIException, e:
-	    print 'Encountered an error while sending: %s' % str(e)
+	    return 'Encountered an error while sending: %s' % str(e)
+
